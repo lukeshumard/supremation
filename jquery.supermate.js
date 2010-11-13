@@ -1,5 +1,5 @@
 /*
-+ SuperbAnimation
++ Supermate
 + copyright Luke Shumard, licensed GPL & MIT
 + version 0.01
 
@@ -9,7 +9,7 @@
 */
 ;(function($){
 	
-	$.fn.superbanimation = function(options,callback){
+	$.fn.supermate = function(options,callback){
 		
 		// CALLING ALL FUNCTIONS
 		
@@ -45,8 +45,8 @@
 	    }
 	    
 	    // BEGIN
-	    var opts	= $.extend({}, $.superbanimation.defaults, options),
-        props		= $.superbanimation,
+	    var opts	= $.extend({}, $.supermate.defaults, options),
+        props		= $.supermate,
         beginning, end, distance, duration;
         
         // DEFINE CALLBACK ARGUEMENT AS A FUNCTION
@@ -60,9 +60,9 @@
         
         return this;
         
-        }; // end $.fn.superbanimation
+        }; // end $.fn.supermate
 		
-		$.superbanimation = {     
+		$.supermate = {     
 	        defaults      : {
 		        debug           : false,
 		        properties		: null,
