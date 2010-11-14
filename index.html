@@ -27,12 +27,7 @@
 		$('a#a1').click(function(e) {
 			e.preventDefault();
 			
-			$('#box1').supermate({
-				debug		: true,
-				properties	: {left: '200px'},
-				ratio		: 4,
-				easing		: 'swing',
-			}, function() {
+			$('#box1').supermate({left: '200px'},4,'swing', function() {
 				console.log('hell yeah');
 			});
 
@@ -46,7 +41,7 @@
 				400,
 				'swing',
 				function() {
-				console.log('hell yeah');
+				console.log('hell no');
 			});
 
 		});

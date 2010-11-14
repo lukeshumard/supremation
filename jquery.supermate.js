@@ -1,23 +1,21 @@
 /*
 + Supermate
-+ copyright Luke Shumard, licensed GPL & MIT
++ copyright Luke Shumard & Dave Donahue, licensed GPL & MIT
 + version 0.01
 
 + Documentation: xxx
-+ GitHub: xxx
++ GitHub: https://github.com/lukeshumard/Supermate
+
++ lukeshumard.com
++ monowi.net
 
 */
 ;(function($){
 	
-	$.fn.supermate = function(options,callback){
+	$.fn.supermate = function(properties,speed,easing,callback){
 		
 		// CALLING ALL FUNCTIONS
-		
-		// console log wrapper.
-	    function debug(){
-	      if (opts.debug) { window.console && console.log.call(console,arguments)}
-	    }
-	    
+			    
 	    function areSelectorsValid(opts){
 	    	for (var key in opts){
 		        //if (/* NO MATCH */){
@@ -36,24 +34,23 @@
 	    	beginning = 10;
 	    	end = 800;
 	    	distance = end - beginning;
-	    	duration = distance * (1 / opts.ratio);
+	    	duration = distance * (1 / speed);
 	    }
 	    
 	    function initAnimation(selector) {
-	    	debug(duration);
-	    	selector.animate(opts.properties,duration,opts.easing,callback.call());
+	    	console.log(duration);
+	    	selector.animate(properties,duration,easing,callback.call());
 	    }
 	    
 	    // BEGIN
-	    var opts	= $.extend({}, $.supermate.defaults, options),
-        props		= $.supermate,
+	    var opts	= $.supermate,
         beginning, end, distance, duration;
         
         // DEFINE CALLBACK ARGUEMENT AS A FUNCTION
         callback    = callback || function(){};
         
         // CHECK FOR VALID OPTIONS
-        // if (!areSelectorsValid(opts)){ return false; }
+        // if (!areSelectorsValid()){ return false; }
         
         determineRatio();
         initAnimation($(this));
@@ -63,13 +60,9 @@
         }; // end $.fn.supermate
 		
 		$.supermate = {     
-	        defaults      : {
-		        debug           : false,
 		        properties		: null,
 		        ratio			: null,
 		        easing			: null,
-		    },
-	        //properties go here
 	  	};
 	  	
 	
