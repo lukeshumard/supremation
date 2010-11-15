@@ -12,50 +12,50 @@
 */
 ; (function($) {
 
+  // Extend jQuery with supermate function
   $.fn.supermate = function(properties, speed, easing, callback) {
 
     // Get current element
     var element = this;
       
-    // Calculate the duration
+    // Calculate the duration for .animate
     duration = calcDuration(element, properties, speed);
       
     // Call .animate
     $(element).animate(properties, duration, easing, callback);
 
-    // Calculate duration of animation
+    // Given an element, an array of CSS changes, and a speed (in px/s), calculate the duration for .animate
     function calcDuration(element, properties, speed) {
       
-      // Take measurements on original element (offset, height, width)
+      // Get positioning info for original element
       before = measurePosition(element);
       
       // Clone original element
       cloned = element.clone().insertBefore(element);
       
-      // Hide original element
+      // Hide original element (so that cloned element can be placed in the exact position of the original)
       element.hide();
       
-      // Apply CSS to cloned element
+      // Apply specified CSS changes to cloned element
       $.each(properties, function(key, value) {
         cloned.css(key, value);
       });
       
-      // Take new measurements
+      // Get positioning info for cloned element
       after = measurePosition(cloned);
       
-      // Go back to normal
+      // Revert to normal
       cloned.remove();
       element.show();
 
-      // Compute distance between before and after
+      // Calculate the distance between before and after elements
       distance = calcDistance(before, after);
       
-      // Compute duration
-      return distance / ( speed / 1000 );
-      
+      // Compute and return the duration (time = distance/speed)
+      return distance / ( speed / 1000 );     // Speed provided in px/s; convert to px/ms
     }
     
-    // Calculate distance between two objects (by property)
+    // Calculate distance between two objects
     function calcDistance(elem1, elem2) {
       var max = 0; var distance = 0;
       
@@ -67,17 +67,14 @@
       return max;
     }
     
+    // Take a snapshot of positioning attributes of an object (offset, dimensions)
     function measurePosition(elem) {
-      top = $(elem).offset().top;
-      left = $(elem).offset().left;
-      width = $(elem).width();
-      height = $(elem).height();
       
       return {
-        "top" : top,
-        "left" : left,
-        "width" : width,
-        "height" : height
+        "top" : $(elem).offset().top,
+        "left" : $(elem).offset().left,
+        "width" : $(elem).width(),
+        "height" : $(elem).height()
       };
     }
     
