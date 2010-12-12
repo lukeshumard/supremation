@@ -39,8 +39,13 @@
       // Apply specified CSS changes to cloned element
       $.each(properties, function(key, value) {
         var isRelative = value.substr(0,2);
-        if (isRelative == '+=' || isRelative == '-=') { isRelative = true; value = value.substr(2) + 'px'; }
-        else isRelative = false;
+        if (isRelative == '+=') {
+        	value = value.replace(/[^a-zA-Z]+/,'');
+        	value = Math.abs(before[key] + value);
+        } else if (isRelative == '-=') {
+        	value = value.replace(/[^a-zA-Z]+/,'');
+        	value = Math.abs(before[key] - value);
+        };
         cloned.css(key, value);
       });
       
@@ -55,7 +60,6 @@
       distance = calcDistance(before, after);
       
       // Compute and return the duration (time = distance/speed)
-      // console.log(distance / ( speed / 1000 ));
       return distance / ( speed / 1000 );     // Speed provided in px/s; convert to px/ms
     }
     
@@ -72,23 +76,14 @@
     }
     
     // Take a snapshot of positioning attributes of an object (offset, dimensions)
-    function measurePosition(elem,relativity) {
+    function measurePosition(elem) {
       
-      if (relativity) {
-	      return {
-	        "top" : $(elem).position().top,
-	        "left" : $(elem).position().left,
-	        "width" : $(elem).width(),
-	        "height" : $(elem).height()
-	      };
-      } else {
       return {
         "top" : $(elem).offset().top,
         "left" : $(elem).offset().left,
         "width" : $(elem).width(),
         "height" : $(elem).height()
       };
-    }
     };
   }
 })(jQuery);
