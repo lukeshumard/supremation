@@ -1,0 +1,22 @@
+.box {
+	display: block;
+	width: 160px;
+	height: 160px;
+	position: absolute;
+}
+
+a {
+	
+}
+
+#box1 {
+	background: #ff0000;
+	top: 36px;
+	left: 18px;
+}
+
+#box2 {
+	background: #0000ff;
+	top: 214px;
+	left: 18px;
+}
