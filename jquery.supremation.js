@@ -1,9 +1,9 @@
 /*
-+ Supremation
++ SUPREMATION
 + copyright Luke Shumard & Dave Donahue, licensed GPL & MIT
 + version 0.1
 
-+ Documentation: xxx
++ Documentation: http://www.supremation.com
 + GitHub: https://github.com/lukeshumard/supremation
 
 + lukeshumard.com
@@ -40,10 +40,12 @@
       $.each(properties, function(key, value) {
         var isRelative = value.substr(0,2);
         if (isRelative == '+=') {
-        	value = value.replace(/[^a-zA-Z]+/,'');
+        	value = value.substr(2);
+        	value = parseFloat(value);
         	value = Math.abs(before[key] + value);
         } else if (isRelative == '-=') {
-        	value = value.replace(/[^a-zA-Z]+/,'');
+        	value = value.substr(2);
+        	value = parseFloat(value);
         	value = Math.abs(before[key] - value);
         };
         cloned.css(key, value);
@@ -57,18 +59,22 @@
       element.show();
 
       // Calculate the distance between before and after elements
-      distance = calcDistance(before, after);
+      distance = calcDistance(before,after);
       
       // Compute and return the duration (time = distance/speed)
       return distance / ( speed / 1000 );     // Speed provided in px/s; convert to px/ms
     }
     
     // Calculate distance between two objects
-    function calcDistance(elem1, elem2) {
+    function calcDistance(elem1,elem2) {
       var max = 0; var distance = 0;
       
       $.each(elem1, function(key, value) {
-        distance = Math.abs( elem1[key] - elem2[key] );
+        if (elem1[key] > elem2[key]) {
+        	distance = Math.abs( elem1[key] - elem2[key] );
+        } else {
+        	distance = Math.abs( elem2[key] - elem1[key] );
+        };
         max = (distance > max) ? distance : max;
       });
       
