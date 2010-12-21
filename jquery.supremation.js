@@ -37,16 +37,32 @@
       element.hide();
       
       // Apply specified CSS changes to cloned element
+      // note: relative positioning needs to be changed into a singular function with a variable operator.
+      // ...you know, to be cleaner
       $.each(properties, function(key, value) {
         var isRelative = value.substr(0,2);
         if (isRelative == '+=') {
         	value = value.substr(2);
         	value = parseFloat(value);
-        	value = Math.abs(before[key] + value);
+        	elemRelative = element.css('position');
+        	if (elemRelative == 'relative') {
+        		var prevState = element.css(key);
+        		prevState = parseFloat(prevState);
+        		value = prevState + value;
+        	} else {
+        		value = Math.abs(value);
+        	};
         } else if (isRelative == '-=') {
         	value = value.substr(2);
         	value = parseFloat(value);
-        	value = Math.abs(before[key] - value);
+        	elemRelative = element.css('position');
+        	if (elemRelative == 'relative') {
+        		var prevState = element.css(key);
+        		prevState = parseFloat(prevState);
+        		value = prevState - value;
+        	} else {
+        		value = Math.abs(0 - value);
+        	}
         };
         cloned.css(key, value);
       });
@@ -62,6 +78,7 @@
       distance = calcDistance(before,after);
       
       // Compute and return the duration (time = distance/speed)
+      // console.log ( 'duration: ' + distance / ( speed / 1000 ) );
       return distance / ( speed / 1000 );     // Speed provided in px/s; convert to px/ms
     }
     
@@ -70,7 +87,7 @@
       var max = 0; var distance = 0;
       
       $.each(elem1, function(key, value) {
-        if (elem1[key] > elem2[key]) {
+        if (elem1[key] >= elem2[key]) {
         	distance = Math.abs( elem1[key] - elem2[key] );
         } else {
         	distance = Math.abs( elem2[key] - elem1[key] );
@@ -83,7 +100,6 @@
     
     // Take a snapshot of positioning attributes of an object (offset, dimensions)
     function measurePosition(elem) {
-      
       return {
         "top" : $(elem).offset().top,
         "left" : $(elem).offset().left,
