@@ -1,0 +1,553 @@
+/* -------------------------------------------------------------- 
+  
+   RESET
+   
+-------------------------------------------------------------- */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+
+body { 
+  line-height: 1.5; 
+  overflow-y: scroll;
+  min-width: 1100px;
+}
+
+body.loading {
+	opacity: 0;
+}
+
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align: middle; }
+
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+
+
+/* -------------------------------------------------------------- 
+
+   TYPOGRAPHY
+   
+-------------------------------------------------------------- */
+
+/* Default font settings. 
+   The font-size percentage is of 16px. (0.75 * 16px = 12px) */
+html { font-size:100.01%; }
+body { 
+  font-size: 11px;
+  color: #666666; 
+  background: #fafaf7;
+  font-family: Courier, serif;
+  line-height: 1.5;
+}
+
+
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
+
+h2, h3, h4 {
+	font-family: Courier;
+}
+
+h2, h3 {
+	text-transform: uppercase;
+}
+
+h2 {
+	font-size:24px;
+	line-height:1.18;
+	margin-bottom:1em;
+	color: #101010;
+}
+
+
+h3 {
+	color: #000;
+	font-size: 1.6em;
+	line-height: 1.4545454545454546em;
+}
+
+h3 span {
+	border-bottom: 1px solid #000;
+	margin-bottom: 4px;
+	padding-bottom: 4px;
+}
+
+h3 a {
+	color: #000;
+}
+
+h3 a:hover,
+h3 span.hover {
+	color: #20acb8;
+	border-color: #20acb8;
+}
+
+h4 {
+	padding-bottom: 1px;
+	font-size: 16px;
+	line-height: 1.0; margin-top: -0em; margin-bottom: 0; 
+}
+
+h5 { font-weight: bold; font-size: 1em; line-height: 1.4545454545454546em; margin-top: -0em; margin-bottom: 1.4545454545454546em; }
+
+h6 { font-weight: bold;font-size: 1em; line-height: 1.4545454545454546em; margin-top: -0em; margin-bottom: 1.4545454545454546em; }
+
+
+
+/* Text elements
+-------------------------------------------------------------- */
+
+p           { margin: 0 0 1.5em; }
+
+a:focus     { color: #B33300;  text-decoration: none; }
+a:hover     { color: #101010;  text-decoration: none; }
+a           { color: #B33300; text-decoration: none; outline: none; }
+p a           { color: #B33300; }
+
+blockquote  { margin: 1.5em; color: #666; font-style: italic; }
+strong      { font-weight: bold; }
+em,dfn      { font-style: italic; }
+dfn         { font-weight: bold; }
+sup, sub    { line-height: 0; }
+
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+abbr, 
+acronym     { border-bottom: 1px dotted #666; }
+address     { margin: 0 0 1.5em; font-style: italic; }
+del         { color:#666; }
+
+pre 				{ margin: 1.5em 0; white-space: pre; }
+pre,code,tt { font: 1em 'courier', monospace; line-height: 1.0; background: #ddd; padding: 2px; }
+
+
+/* Lists
+-------------------------------------------------------------- */
+
+li ul, 
+li ol       { margin:0 1.5em; }
+ul, ol      { margin: 0 1.5em 1.5em 1.5em; }
+
+ul          { list-style-type: disc; }
+ol          { list-style-type: decimal; }
+
+dl          { margin: 0 0 1.5em 0; }
+dl dt       { font-weight: bold; }
+dd          { margin-left: 1.5em;}
+
+
+/* Tables
+-------------------------------------------------------------- */
+
+table       { margin-bottom: 1.4em; width:100%; }
+th          { font-weight: bold; }
+thead th 		{ background: #c3d9ff; }
+th,td,caption { padding: 4px 10px 4px 5px; }
+tr.even td  { background: #e5ecf9; }
+tfoot       { font-style: italic; }
+caption     { background: #eee; }
+
+
+
+
+/* --------------------------------------------------------------
+   
+   GRID
+   
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 1095px;
+  
+}
+
+section#header.container,
+section#footer.container {
+	padding-left: 17px;
+}
+
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margin. */
+.column, div.span-1, div.span-2, div.span-3, div.span-4, div.span-5, div.span-6, div.span-7, div.span-8, div.span-9, div.span-10, div.span-11, div.span-12, div.span-13, div.span-14, div.span-15, div.span-16, div.span-17, div.span-18, div.span-19, div.span-20, div.span-21 {
+  float: left;
+  margin-right: 18px;
+}
+
+/* The last column in a row needs this class. */
+.last, div.last { margin-right: 0; }
+
+/* Leaving these classes for reference. */
+.span-1  { width: 35px; }
+.span-2  { width: 88px; }
+.span-3  { width: 141px; }
+.span-4  { width: 194px; }
+.span-5  { width: 247px; }
+.span-6  { width: 300px; }
+.span-7  { width: 353px; }
+.span-8  { width: 406px; }
+.span-9  { width: 459px; }
+.span-10  { width: 512px; }
+.span-11  { width: 565px; }
+.span-12  { width: 618px; }
+.span-13  { width: 671px; }
+.span-14  { width: 724px; }
+.span-15  { width: 777px; }
+.span-16  { width: 830px; }
+.span-17  { width: 883px; }
+.span-18  { width: 936px; }
+.span-19  { width: 989px; }
+.span-20  { width: 1042px; }
+.span-21  { width: 1095px; margin-right: 0; }
+
+
+/* Misc classes and elements
+-------------------------------------------------------------- */
+
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd; 
+  color: #ddd;
+  clear: both; 
+  float: none; 
+  width: 100%; 
+  height: .1em;
+  margin: 0 0 1.45em;
+  border: none; 
+}
+hr.space {
+  background: #fff;
+  color: #fff;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020"; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;
+  overflow:hidden; 
+}
+.clearfix, .container {display: block;}
+
+/* Regular clearing
+   apply to column that should drop below previous ones. */
+
+.clear { clear:both; }
+
+
+/* -------------------------------------------------------------- 
+
+   FORMS
+   
+-------------------------------------------------------------- */
+
+label       {  }
+fieldset    { padding:1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc; }
+fieldset.mailist-list-fieldset, fieldset#search, fieldset#errorsearch    { padding:0; margin: 0; border: 0; }
+legend      { font-weight: bold; font-size:1.2em; }
+
+
+/* Form fields
+-------------------------------------------------------------- */
+
+input[type=text], input[type=password],
+input.text, input.title, 
+textarea, select { 
+  background-color:#fff; 
+  border:1px solid transparent; 
+}
+input[type=text]:focus, input[type=password]:focus, 
+input.text:focus, input.title:focus, 
+textarea:focus, select:focus { 
+  background-color: #fefefe;
+}
+
+input[type=text], input[type=password],
+input.text, input.title,
+textarea, select {
+  margin:0.5em 0;
+}
+
+input.text, 
+input.title   { width: 300px; padding:5px; }
+input.title   { font-size:1.5em; }
+textarea      { width: 390px; height: 250px; padding:5px; }
+
+input[type=checkbox], input[type=radio], 
+input.checkbox, input.radio { 
+  position:relative; top:.25em; 
+}
+
+form.inline { line-height:3; }
+form.inline p { margin-bottom:0; }
+
+
+/* --------------------------------------------------------------
+   
+   HEADER
+   
+-------------------------------------------------------------- */
+
+section#header {
+  margin: 0;
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+section#header h2 {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #101010;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 0.01em;
+	position: absolute;
+	letter-spacing: 0.11em;
+	word-spacing: 0.015em;
+	top: 9px;
+	margin: 0;
+}
+
+
+/* Logo
+-------------------------------------------------------------- */
+
+h1#logo {
+	width: 434px;
+	height: 60px;
+	display: block;
+	margin: 18px 0 0 18px;
+}
+
+h1#logo a {
+	display: block;
+	width: 434px;
+	height: 60px;
+	background-image: url('images/h1.png');
+	background-repeat: no-repeat;
+	text-indent: -9999em;
+}
+
+
+/* --------------------------------------------------------------
+   
+   MENU
+   
+-------------------------------------------------------------- */
+
+section#menu {
+	display: block;
+	position: fixed;
+	top: 92px;
+	left: 0;
+	background: #000;
+	z-index: 9998;
+}
+
+section#menu nav ul {
+	margin: 0;
+	padding: 0 8px 0 50px;
+}
+
+section#menu nav ul li {
+	display: block;
+	margin: 0 9px 0 0;
+	padding: 0;
+	list-style: none outside none;
+	float: left;
+}
+
+section#menu nav ul li a {
+	display: block;
+	margin: 0;
+	padding: 1px;
+	color: #fff;
+	font-size: 1.4em;
+	text-transform: uppercase;
+	line-height: 1.4em;
+}
+
+section#menu nav ul li a:hover,
+section#menu nav ul li.current a {
+	color: #B33300;
+}
+
+#aside {
+	position: fixed;
+	top: 140px;
+	left: 0px;
+	width: 319px;
+	display: block;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* Demo
+-------------------------------------------------------------- */
+
+#demo-movement, #aside h3, #aside h2 {
+	padding-left: 18px;
+}
+
+#demo-movement p {
+	margin: 0;
+	padding: 0 0 .7em;
+}
+
+#sliders-container {
+	display: block;
+	border-top: 1px solid #101010;
+	padding: 18px 0 0 18px;
+	margin: 12px 0 0;
+}
+
+#speedslider {
+	width: 280px;
+	margin: 0;
+	
+}
+
+#controls #speedslider a {
+	margin: 0;
+}
+
+#speeddialog {
+	margin: 6px 0 12px;
+	padding: 6px 0 12px;
+}
+
+#distanceslider {
+	width: 280px;
+	margin: 0;
+}
+
+#controls #distanceslider a {
+	margin: 0;
+}
+
+#distancedialog {
+	margin: 6px 0 12px;
+	padding: 6px 0 12px;
+}
+
+#controls {
+	margin: 0 0 12px;
+	z-index: 8000;
+}
+
+#controls a {
+	margin: 6px 2px;
+	z-index: 9990;
+}
+
+/* Loading
+-------------------------------------------------------------- */
+
+#loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9990;
+	width: 100%;
+	height: 100%;
+	display: none;
+	opacity: 0.0;
+	background: #101010;
+}
+
+#loading img {
+	position: absolute;
+	display: block;
+	left: 50%;
+	top: 50%;
+	margin: -8px 0 0 -8px;
+}
+
+
+/* --------------------------------------------------------------
+   
+   CONTENT
+   
+-------------------------------------------------------------- */
+
+section#content {
+	display: block;
+	position: relative;
+	margin-left: 500px;
+	top: 92px;
+	max-width: 700px;
+}
+
+#blacksquare {
+	display: block;
+	width: 120px;
+	height: 120px;
+	background: #101010;
+	position: relative;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}

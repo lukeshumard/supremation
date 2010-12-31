@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js">
+<head>
+	<meta charset="utf-8" />
+	<meta name="description" content="jQuery Animation Plugin" />
+	<meta name="author" content="Supremation" /><meta name="keywords" content="supremation,supremate,jquery,animate,plugin,javascript,movement,fluid,malevich,plugins,animation,move,js" />
+
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
+
+    <title>Supremation | jQuery Animation Plugin</title>
+	
+	<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen, projection" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css" type="text/css" media="all" />
+	
+	<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="/css/ie.css" media="screen" /> <![endif]-->
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+	
+	<script src="js/css_browser_selector.js"></script>
+	<script src="js/global.js"></script>
+
+	
+	<script src="js/jquery.keynav.js"></script>
+	<script src="js/jquery.address-1.3.1.min.js"></script>
+	<script src="js/jquery.supremation.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.scrollTo-1.4.2-min.js"></script>
+	<script src="js/modernizr-1.6.min.js"></script>
+
+	<script src="js/warning.js"></script>
+	
+	<!--[if lt IE 7 ]>
+	<script src="js/dd_belatedpng.js"></script>
+	<![endif]-->
+	
+	<script>
+	    (function() {
+	        // if firefox 3.5+, hide content till load (or 3 seconds) to prevent FOUT
+	        var d = document, e = d.documentElement, s = d.createElement('style');
+	        if (e.style.MozTransform === '') { // gecko 1.9.1 inference
+	            s.textContent = 'body{visibility:hidden}';
+	            e.firstChild.appendChild(s);
+	            function f() { s.parentNode && s.parentNode.removeChild(s); }
+	            addEventListener('load', f, false);
+	            setTimeout(f, 3000);
+	        }
+	    })();
+	</script>
+	
+</head>
+
+
+<body>
+
+	<section id="header" >
+		<h1 id="logo"><a href="/">Supremation</a></h1>
+	</section>
+	
+	<section id="menu">
+		<nav class="clearfix">
+			<ul>
+				<li><a href="http://www.supremation.com/">jQuery Animation Plugin</a></li>
+			</ul>
+		</nav>
+	</section>
+	
+	<div id="aside">
+	
+		<div id="controls">
+			
+			<h3>Controls</h3>
+			
+			<div id="demo-movement">
+				<p><a href="#" rel="left">Supremate Left</a> |
+				<a href="#" rel="right">Supremate Right</a></p>
+				<p><a href="#" rel="up">Supremate Up</a> |
+				<a href="#" rel="top">Supremate Down</a></p>
+				<p><a href="#" id="reset" rel="Reset">Reset</a></p>
+			</div>
+			
+			<div id="sliders-container">
+				
+				<div id="speedslider"></div>
+				<div id="speeddialog"></div>
+			
+				<div id="distanceslider"></div>
+				<div id="distancedialog"></div>
+			
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<section id="content">
+		
+		<div id="content-container">
+		
+			<h2>Demo</h2>
+			<p>Use the controls to the left to animate the black square! Despite the distance the animation covers, the square will always move at the speed you have specified.</p>
+	
+			<div id="blacksquare"></div>
+		
+		</div>
+	
+	</section>
+	
+</body>
+
+</html>
