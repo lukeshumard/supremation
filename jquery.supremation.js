@@ -37,33 +37,20 @@
       element.hide();
       
       // Apply specified CSS changes to cloned element
-      // note: relative positioning needs to be changed into a singular function with a variable operator.
-      // ...you know, to be cleaner
       $.each(properties, function(key, value) {
         var isRelative = value.substr(0,2);
-        if (isRelative == '+=') {
+        if (isRelative == '+=' || isRelative == '-=') {
         	value = value.substr(2);
         	value = parseFloat(value);
         	elemRelative = element.css('position');
         	if (elemRelative == 'relative') {
         		var prevState = element.css(key);
-        		prevState = parseFloat(prevState);
-        		value = prevState + value;
+	        	prevState = parseFloat(prevState);
+	        	isRelative == '+=' ? value = prevState + value : value = prevState - value; ;
         	} else {
-        		value = Math.abs(value);
-        	};
-        } else if (isRelative == '-=') {
-        	value = value.substr(2);
-        	value = parseFloat(value);
-        	elemRelative = element.css('position');
-        	if (elemRelative == 'relative') {
-        		var prevState = element.css(key);
-        		prevState = parseFloat(prevState);
-        		value = prevState - value;
-        	} else {
-        		value = Math.abs(0 - value);
+        		isRelative == '+=' ? value = Math.abs(value) : value = Math.abs(0 - value);
         	}
-        };
+        }        
         cloned.css(key, value);
       });
       
@@ -78,7 +65,10 @@
       distance = calcDistance(before,after);
       
       // Compute and return the duration (time = distance/speed)
-      // console.log ( 'duration: ' + distance / ( speed / 1000 ) );
+      
+      // console.log('distance: ' + distance);
+      // console.log('duration: ' + distance / ( speed / 1000 ) );
+      
       return distance / ( speed / 1000 );     // Speed provided in px/s; convert to px/ms
     }
     
