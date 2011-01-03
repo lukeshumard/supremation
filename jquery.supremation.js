@@ -36,23 +36,8 @@
       // Hide original element (so that cloned element can be placed in the exact position of the original)
       element.hide();
       
-      // Apply specified CSS changes to cloned element
-      $.each(properties, function(key, value) {
-        var isRelative = value.substr(0,2);
-        if (isRelative == '+=' || isRelative == '-=') {
-        	value = value.substr(2);
-        	value = parseFloat(value);
-        	elemRelative = element.css('position');
-        	if (elemRelative == 'relative') {
-        		var prevState = element.css(key);
-	        	prevState = parseFloat(prevState);
-	        	isRelative == '+=' ? value = prevState + value : value = prevState - value; ;
-        	} else {
-        		isRelative == '+=' ? value = Math.abs(value) : value = Math.abs(0 - value);
-        	}
-        }        
-        cloned.css(key, value);
-      });
+      // Apply properties to cloned element
+      $(cloned).animate(properties,0)
       
       // Get positioning info for cloned element
       after = measurePosition(cloned);
@@ -74,17 +59,11 @@
     
     // Calculate distance between two objects
     function calcDistance(elem1,elem2) {
-      var max = 0; var distance = 0;
-      
+      var max = distance = 0;   
       $.each(elem1, function(key, value) {
-        if (elem1[key] >= elem2[key]) {
-        	distance = Math.abs( elem1[key] - elem2[key] );
-        } else {
-        	distance = Math.abs( elem2[key] - elem1[key] );
-        };
+        distance = Math.abs( elem1[key] - elem2[key] );
         max = (distance > max) ? distance : max;
-      });
-      
+      }); 
       return max;
     }
     
