@@ -10,71 +10,78 @@
 + monowi.net
 
 */
-; (function($) {
-
-  // Extend jQuery with supermate function
-  $.fn.supremate = function(properties, speed, easing, callback) {
-
-    // Get current element
-    var element = this;
+(function($) {
+  // SupreMate class
+  var SupreMate = window.SupreMate = function(element, properties, speed, easing, callback){
+    this.element = $(element);
+    this.speed = speed;
       
-    // Calculate the duration for .animate
-    duration = calcDuration(element, properties, speed);
-      
-    // Call .animate
-    $(element).animate(properties, duration, easing, callback);
-
-    // Given an element, an array of CSS changes, and a speed (in px/s), calculate the duration for .animate
-    function calcDuration(element, properties, speed) {
-      
+    var p =this.properties = properties;
+    var e = this.easing = easing;
+    var c = this.callback = callback;
+    var d = this._duration = this.calcDuration();
+    console.log(d);
+    this.element.animate(p,d,e,c);
+  };
+  
+  SupreMate.prototype = {
+    calcDuration: function(){
       // Get positioning info for original element
-      before = measurePosition(element);
+      var before = this.element.measurePosition();
       
       // Clone original element
-      cloned = element.clone().insertBefore(element);
+      this._cloned = this.element.clone().insertBefore(this.element);
       
       // Hide original element (so that cloned element can be placed in the exact position of the original)
-      element.hide();
+      this.element.hide();
       
       // Apply properties to cloned element
-      $(cloned).animate(properties,0)
+      this._cloned.animate(this.properties,0);
       
       // Get positioning info for cloned element
-      after = measurePosition(cloned);
+      var after = this._cloned.measurePosition();
       
       // Revert to normal
-      cloned.remove();
-      element.show();
+      this._cloned.remove();
+      this.element.show();
 
       // Calculate the distance between before and after elements
-      distance = calcDistance(before,after);
-      
+      var distance = this.calcDistance(before,after);
+      console.log(distance);
       // Compute and return the duration (time = distance/speed)
       
-      // console.log('distance: ' + distance);
-      // console.log('duration: ' + distance / ( speed / 1000 ) );
-      
-      return distance / ( speed / 1000 );     // Speed provided in px/s; convert to px/ms
-    }
+      return distance / ( this.speed / 1000 );     // Speed provided in px/s; convert to px/ms
+    },
     
-    // Calculate distance between two objects
-    function calcDistance(elem1,elem2) {
-      var max = distance = 0;   
-      $.each(elem1, function(key, value) {
-        distance = Math.abs( elem1[key] - elem2[key] );
+    calcDistance: function(before,after){
+      var max = 0,
+          distance;   
+      $.each(before, function(key, value) {
+        distance = Math.abs( before[key] - after[key] );
         max = (distance > max) ? distance : max;
+        console.log(distance);
       }); 
       return max;
     }
-    
-    // Take a snapshot of positioning attributes of an object (offset, dimensions)
-    function measurePosition(elem) {
-      return {
-        "top" : $(elem).offset().top,
-        "left" : $(elem).offset().left,
-        "width" : $(elem).width(),
-        "height" : $(elem).height()
-      };
+  };
+  
+  $.fn.measurePosition = function(){
+    var el = $(this),
+        offset = el.offset();
+    return {
+      "top" : offset.top,
+      "left" : offset.left,
+      "width" : el.width(),
+      "height" : el.height()
     };
-  }
+  };
+  
+  // Extend jQuery with supermate function
+  $.fn.supremate = function(properties, speed, easing, callback) {
+    // Get current element
+    var obj = new SupreMate(this,properties,speed,easing,callback);
+      
+    this.data('supremate',obj);
+    return this;
+  };
 })(jQuery);
