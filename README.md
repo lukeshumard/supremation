@@ -1,5 +1,3 @@
-### Supremation ###
-
 # Demo #
 http://lukeshumard.github.io/supremation
 
